@@ -25,11 +25,8 @@ fi
 sudo docker volume create portainer_data
 
 # initalize portainer
-sudo docker run -d \
-    -p 8000:8000 \
-    -p 9443:9443 \
-    --name portainer \
-    --restart=always \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v portainer_data:/data \
-    portainer/portainer-ce:2.21.2
+sudo curl -L https://downloads.portainer.io/ce2-21/portainer-agent-stack.yml -o portainer-agent-stack.yml
+
+docker swarm init
+
+docker stack deploy -c portainer-agent-stack.yml portainer

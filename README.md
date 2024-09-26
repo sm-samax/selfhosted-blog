@@ -18,6 +18,7 @@ The goal of this project is to get a reusable application stack that is deployab
 ## SHOULD-HAVE Features
 
 - Matomo
+- Jenkins
 
 ## COULD-HAVE Features
 

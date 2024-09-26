@@ -30,3 +30,11 @@ sudo curl -L https://downloads.portainer.io/ce2-21/portainer-agent-stack.yml -o 
 docker swarm init
 
 docker stack deploy -c portainer-agent-stack.yml portainer
+
+docker volume create jenkins_data
+
+# initalize jenkins
+sudo docker run -d --name jenkins \
+    -p 8080:8080 \
+    -v jenkins_data:/var/jenkins_home \
+    jenkins/jenkins:jdk21

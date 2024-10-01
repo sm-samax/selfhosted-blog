@@ -1,0 +1,32 @@
+version: '3.2'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:jdk21
+    container_name: jenkins
+    restart: always
+    ports:
+    - 8080:8080
+    volumes:
+    - jenkins_data:/var/jenkins_home
+    networks:
+    - develop
+
+  jenkins-agent:
+    image: jenkins-agent
+    build: ./jenkins-agent
+    container_name: jenkins-agent
+    restart: always
+    privileged: true
+    ports:
+    - 2375:2375
+    - 2376:2376
+    networks:
+    - develop
+
+volumes:
+  jenkins_data:
+
+networks:
+  develop:
+    driver: bridge

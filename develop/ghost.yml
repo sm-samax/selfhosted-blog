@@ -1,0 +1,42 @@
+version: '3.2'
+
+services:
+    ghost:
+        image: ghost:5.94.2
+        container_name: ghost
+        restart: always
+        ports:
+        - 2368:2368
+        environment:
+            database__client: mysql
+            database__connection__host: mysql
+            database__connection__user: root
+            database__connection__password: pw1234
+            database__connection__database: ghost
+        volumes:
+        - ghost_data:/var/lib/ghost/content   
+        networks:
+        - backend
+        depends_on:
+        - mysql
+
+    mysql:
+        image: mysql:8.4.2
+        container_name: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: pw1234
+            MYSQL_DATABASE: ghost
+        volumes:
+        - mysql_data:/var/lib/mysql
+        networks:
+        - backend
+
+volumes:
+    ghost_data:
+    mysql_data:
+
+networks:
+    backend:
+        driver: overlay
+        attachable: true

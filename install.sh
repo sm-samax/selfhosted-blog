@@ -38,3 +38,9 @@ sudo docker run -d --name jenkins \
     -p 8080:8080 \
     -v jenkins_data:/var/jenkins_home \
     jenkins/jenkins:jdk21
+
+# deploy ghost stack
+sudo curl -L https://raw.githubusercontent.com/sm-samax/selfhosted-blog/90f1137919a700fe3f55f37d9b2304a5939ab91f/develop/ghost.yml \
+    -o ghost.yml
+
+docker stack deploy -c ghost.yml ghost

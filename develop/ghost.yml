@@ -1,9 +1,8 @@
-version: '3.2'
-
 services:
     ghost:
         image: ghost:5.94.2
         restart: always
+        hostname: ghost
         ports:
         - 2368:2368
         environment:
@@ -22,6 +21,7 @@ services:
     mysql:
         image: mysql:8.4.2
         restart: always
+        hostname: mysql
         environment:
             MYSQL_ROOT_PASSWORD: pw1234
             MYSQL_DATABASE: ghost
@@ -33,6 +33,7 @@ services:
     phpmyadmin:
         image: phpmyadmin:5.2.1
         restart: always
+        hostname: phpmyadmin
         ports:
         - 8082:80
         environment:
@@ -47,5 +48,4 @@ volumes:
 
 networks:
     backend:
-        driver: overlay
-        attachable: true
+        driver: bridge

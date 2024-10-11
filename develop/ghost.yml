@@ -12,8 +12,6 @@ services:
         image: ghost:5.94.2
         restart: always
         hostname: ghost
-        ports:
-        - 2368:2368
         environment:
             database__client: mysql
             database__connection__host: mysql
@@ -43,8 +41,6 @@ services:
         image: phpmyadmin:5.2.1
         restart: always
         hostname: phpmyadmin
-        ports:
-        - 8082:80
         environment:
             PMA_HOST: mysql
             MYSQL_ROOT_PASSWORD: pw1234
